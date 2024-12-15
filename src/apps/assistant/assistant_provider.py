@@ -9,8 +9,13 @@ class AssistantProvider(BaseOpenAiAssistant):
 
     @staticmethod
     def validate_assistant_type(assistant):
-        if assistant not in ['tech', 'writing']:
+        if assistant not in ['placeholder', 'tech', 'writing']:
             raise ValueError(f"Assistant '{assistant}' is not supported.")
+
+    @staticmethod
+    def get_placeholder_assistant(model_name="gpt-4o-mini"):
+        assistant_config = get_tech_assistant_config(model_name)
+        return BaseOpenAiAssistant(assistant_config)
 
     @staticmethod
     def get_tech_assistant(model_name="gpt-4o-mini"):

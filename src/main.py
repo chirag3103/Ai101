@@ -3,6 +3,11 @@ import argparse
 from apps.assistant.assistant_provider import AssistantProvider
 
 
+def placeholder_support(assistant_prov):
+    placeholder_assistant = assistant_prov.get_writing_assistant()
+    placeholder_assistant.generate_response()
+
+
 def letter_support(assistant_prov):
     # Split into specific vs generalized writing (both won't be possible in one, will it?)
     writing_assistant = assistant_prov.get_writing_assistant()
