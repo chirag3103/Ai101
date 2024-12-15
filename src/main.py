@@ -1,33 +1,34 @@
-# This is a sample Python script.
+import argparse
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-import asyncio
-
-from apps.writing_buddy.writing_buddy import WritingBuddy
-from apps.shared.model import LLMs
-# from apps.lor_writing.generate import Generate
-from apps.tech_buddy.tech_buddy import TechBuddy
+from apps.assistant.assistant_provider import AssistantProvider
 
 
-def get_model_info():
-    mod = LLMs.get_model_info('gpt-4o-mini')
-    print(f'Model Params, {mod}')
-
-
-def letter_support():
+def letter_support(assistant_prov):
     # Split into specific vs generalized writing (both won't be possible in one, will it?)
-    writing_buddy = WritingBuddy()
-    writing_buddy.generate_response()
+    writing_assistant = assistant_prov.get_writing_assistant()
+    writing_assistant.generate_response()
 
 
-def tech_support():
-    # Use a breakpoint in the code line below to debug your script.
-    tech_buddy = TechBuddy()
-    tech_buddy.generate_response()
+def tech_support(assistant_prov):
+    tech_assistant = assistant_prov.get_tech_assistant()
+    tech_assistant.generate_response()
 
 
-# Press the green button in the gutter to run the script.
+def main(**kwargs):
+    assistant_name = kwargs.get('assistant_type')
+
+    assistant_provider = AssistantProvider(assistant_name)
+    tech_support(assistant_provider)
+    # letter_support(assistant_provider)
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(description='Specify parameters for the assistant.')
+    parser.add_argument('--assistant_type', type=str, required=True, help='The name of the assistant to be used')
+
+    return vars(parser.parse_args())
+
+
 if __name__ == '__main__':
-    # Define the project root
-    tech_support()
+    args = parse_args()
+    main(**args)
