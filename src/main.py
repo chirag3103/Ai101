@@ -4,7 +4,7 @@ from apps.assistant.assistant_provider import AssistantProvider
 
 
 def placeholder_support(assistant_prov):
-    placeholder_assistant = assistant_prov.get_writing_assistant()
+    placeholder_assistant = assistant_prov.get_placeholder_assistant()
     placeholder_assistant.generate_response()
 
 
@@ -23,7 +23,8 @@ def main(**kwargs):
     assistant_name = kwargs.get('assistant_type')
 
     assistant_provider = AssistantProvider(assistant_name)
-    tech_support(assistant_provider)
+    placeholder_support(assistant_provider)
+    # tech_support(assistant_provider)
     # letter_support(assistant_provider)
 
 
