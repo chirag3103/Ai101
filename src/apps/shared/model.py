@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class LLMs(Enum):
+class Models(Enum):
     GPT_4o_MINI = {
         "name": "gpt-4o-mini",
         "description": "A lightweight GPT-4 variant optimized for quick responses.",

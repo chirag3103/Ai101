@@ -1,4 +1,3 @@
 .env
 /venvAi101
-src/apps/writing_buddy/v1/prompts.md
-src/apps/tech_buddy/v1/prompts.md
+src/apps/content/prompts
