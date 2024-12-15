@@ -1,21 +1,34 @@
-# This is a sample Python script.
-from src.apps.assistant.assistant_provider import AssistantProvider
+import argparse
+
+from apps.assistant.assistant_provider import AssistantProvider
 
 
-def letter_support():
+def letter_support(assistant_prov):
     # Split into specific vs generalized writing (both won't be possible in one, will it?)
-    writing_buddy = assistant_provider.get_tech_assistant()
-    writing_buddy.generate_response()
+    writing_assistant = assistant_prov.get_writing_assistant()
+    writing_assistant.generate_response()
 
 
 def tech_support(assistant_prov):
-    # Use a breakpoint in the code line below to debug your script.
-    tech_buddy = assistant_prov.get_tech_assistant()
-    tech_buddy.generate_response()
+    tech_assistant = assistant_prov.get_tech_assistant()
+    tech_assistant.generate_response()
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    # Define the project root
-    assistant_provider = AssistantProvider()
+def main(**kwargs):
+    assistant_name = kwargs.get('assistant_type')
+
+    assistant_provider = AssistantProvider(assistant_name)
     tech_support(assistant_provider)
+    # letter_support(assistant_provider)
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(description='Specify parameters for the assistant.')
+    parser.add_argument('--assistant_type', type=str, required=True, help='The name of the assistant to be used')
+
+    return vars(parser.parse_args())
+
+
+if __name__ == '__main__':
+    args = parse_args()
+    main(**args)

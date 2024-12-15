@@ -4,22 +4,22 @@ from rich.console import Console
 from rich.markdown import Markdown
 from openai import OpenAI
 
-from src.apps.content.content_provider import ContentProvider
-from src.apps.shared.model import Models
-from src.apps.shared.utils import write_markdown
+from apps.content.content_provider import ContentProvider
+from apps.shared.model import Models
+from apps.shared.utils import write_markdown
 
 
 class BaseOpenAiAssistant(ABC):
-    def __init__(self, buddy_config):
+    def __init__(self, assistant_config):
         self.client = OpenAI()
         self.console = Console()
-        self.validate_buddy_config(buddy_config)
-        self.model_info = Models.get_model_info(buddy_config['model_name'])
-        self.content_provider = ContentProvider(buddy_config)
-        self.buddy_type = buddy_config['name']
+        self.validate_assistant_config(assistant_config)
+        self.model_info = Models.get_model_info(assistant_config['model_name'])
+        self.content_provider = ContentProvider(assistant_config)
+        self.buddy_type = assistant_config['name']
 
     @staticmethod
-    def validate_buddy_config(config):
+    def validate_assistant_config(config):
         if not config['model_name']:
             raise ValueError(f"Model '{config['model_name']}' is not supported.")
 

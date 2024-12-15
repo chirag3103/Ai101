@@ -1,26 +1,23 @@
-from src.apps.assistant.base_open_ai_assistant import BaseOpenAiAssistant
+from apps.assistant.assistant_config import get_tech_assistant_config, get_writing_assistant_config
+from apps.assistant.base_open_ai_assistant import BaseOpenAiAssistant
 
 
 class AssistantProvider(BaseOpenAiAssistant):
 
-    def __init__(self, model_name="gpt-4o-mini"):
-        buddy_config = self.get_tech_assistant(model_name)
-        super().__init__(buddy_config)
+    def __init__(self, assistant):
+        self.validate_assistant_type(assistant)
+
+    @staticmethod
+    def validate_assistant_type(assistant):
+        if assistant not in ['tech', 'writing']:
+            raise ValueError(f"Assistant '{assistant}' is not supported.")
 
     @staticmethod
     def get_tech_assistant(model_name="gpt-4o-mini"):
-        return {
-            "name": "tech_buddy",
-            "model_name": model_name,  # ModelProvider?
-            "system_content_version": 1,
-            "user_content_version": 1,
-        }
+        assistant_config = get_tech_assistant_config(model_name)
+        return BaseOpenAiAssistant(assistant_config)
 
     @staticmethod
     def get_writing_assistant(model_name="gpt-4o-mini"):
-        return {
-            "name": "writing_buddy",
-            "model_name": model_name,  # ModelProvider?
-            "system_content_version": 1,
-            "user_content_version": 1,
-        }
+        assistant_config = get_writing_assistant_config(model_name)
+        return BaseOpenAiAssistant(assistant_config)
