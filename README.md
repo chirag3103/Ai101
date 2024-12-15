@@ -1,12 +1,11 @@
 # Ai101
-execute main:
 ```commandline
-python src/main.py --assistant_type "tech"
+python src/main.py --assistant_type "placeholder"
 ```
-generated output path: `src/apps/<assitant_type>_respose.md`  
 
-```
-commandLine% python src/main.py --assistant_type "placeholder"
+SAMPLE OUTPUT (path: `src/apps/<assitant_type>_respose.md`)
+```commandline
+terminal % python src/main.py --assistant_type "placeholder"
 
 Generated Output:
 

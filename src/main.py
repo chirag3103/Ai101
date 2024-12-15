@@ -24,8 +24,6 @@ def main(**kwargs):
 
     assistant_provider = AssistantProvider(assistant_name)
     placeholder_support(assistant_provider)
-    # tech_support(assistant_provider)
-    # letter_support(assistant_provider)
 
 
 def parse_args():
