@@ -10,7 +10,7 @@ class AssistantProvider(BaseOpenAiAssistant):
 
     @staticmethod
     def validate_assistant_type(assistant):
-        if assistant not in ['placeholder', 'tech', 'writing']:
+        if assistant not in ['placeholder', 'tech', 'writing', 'life_simulation']:
             raise ValueError(f"Assistant '{assistant}' is not supported.")
 
     @staticmethod

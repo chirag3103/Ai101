@@ -17,3 +17,15 @@ my last update.
 
 Response saved to ../src/apps/placeholder_response.md
 ```
+
+Update python
+```commandline
+brew install python
+python -m pip install --upgrade pip
+
+remove venv
+/bin/rm -rf <venvAi101>
+python -m venv <Ai101>
+source venv/bin/activate
+
+
